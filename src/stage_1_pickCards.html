@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Desktop Menu Links -->
+                <div class="md:flex space-x-4">
+                    <a href="/index.html"
+                        class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Home</a>
+                    <a href="./src/stage_1_pickCards.html"
+                        class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">About</a>
+                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Services</a>
+                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
+                </div>
+    
+            </div>
+        </div>
+    
+    </nav>
+
+    <!-- Actual Content Begins -->
+    <div class="m-8 text-center text-xl text-gray-700 font-bold"> Tap your card to view your identity</div>
+
+    <div id="player-count" class="text-center text-gray-700"></div>
+    <div id="test"></div>
+
+
+    <ul id="array-list" class="flex flex-wrap gap-4"></ul>
+
+
+    <!-- Actual Content Ends -->
+    <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        aria-hidden="true">
+        <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+        </div>
+    </div>
+
+    <script>
+        // Get the value from localStorage
+        const playersNum = sessionStorage.getItem('playersNum');
+        const storedArray = JSON.parse(sessionStorage.getItem("characterArray"));  // Retrieve and parse it back into an array
+        const arrlen = storedArray.length
+        if (playersNum) {
+
+            document.getElementById('player-count').innerText = `Players: ${playersNum}`;
+            document.getElementById('test').innerHTML = storedArray.join(", "); 
+
+            const listContainer = document.getElementById('array-list');
+
+            storedArray.forEach((item, index) => {
+                const li = document.createElement('li');  // Create a new <li> element
+                li.textContent = `Player ${index + 1}: ${item}`;  // Set the text content of the <li>
+                li.className = 'w-24 h-24 bg-blue-500 text-white flex items-center justify-center border border-gray-300 shadow-lg';
+                listContainer.appendChild(li);  // Append the <li> to the list container
+            });
+
+        } else {
+            // Handle case if 'players' is not set (e.g., if user navigated directly)
+            console.log('No player number found.');
+        }
+    </script>
+</body>
+</html>
