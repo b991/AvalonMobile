@@ -72,23 +72,24 @@
             storedArray.forEach((item, index) => {
                 const li = document.createElement('li');  // Create a new <li> element
                 //li.textContent = `Player ${index + 1}: ${item}`;  // Set the text content of the <li>
-                li.className = "h-60 flex rounded-lg bg-blue-100 items-center justify-center shadow";
+                li.className = "h-60 flex flex-col rounded-lg bg-blue-100 items-center justify-center shadow";
 
                 const playerDiv = document.createElement('div');
                 playerDiv.textContent = `Player ${index + 1}`;
-                playerDiv.className = "block text-center";
+                playerDiv.className = " text-center border-4 border-red-400";
 
                 const charRole = document.createElement('div');
                 charRole.textContent = `Your character is: ${item}`;
-                charRole.className = "visible hidden";
+                charRole.className = "visible hidden border-4 border-blue-400";
 
                 // Add the onclick event listener for each <li> element
                 li.onclick = function () {
                     // Toggle the 'hidden' class to show/hide the element
                     charRole.classList.toggle('hidden')
+
                 };
-                playerDiv.appendChild(charRole);
-                li.appendChild(playerDiv);
+                //playerDiv.appendChild(charRole);
+                li.append(playerDiv, charRole);
                 
                 listContainer.appendChild(li);  // Append the <li> to the list container
             });

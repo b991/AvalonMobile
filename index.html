@@ -9,8 +9,9 @@
     <script>
         // Function to record the number entered by the user
         function recordNumber() {
-            common_good = "Good"
-            common_evil = "Evil"
+            common_good = "Loyal Servant of Arthur(Good)"
+            common_evil = "Minion of Mordred(Evil)"
+            assassin = "Assassin(Evil)"
             merlin = "Merlin(Good)"
             perc = "Percivel(Good)"
             morgana = "Morgana(Evil)"
@@ -34,7 +35,7 @@
             // Game has common good (0), common evil(1), Merlin (2), Percival(3) and Morgana(4) built in. 
             if(parsedNumber==5){
                 // 3 good, 2 evil
-                let array = [common_good,merlin,perc,common_evil, morgana]
+                let array = [common_good,merlin,perc,assassin, morgana]
                 shuffled = shuffleArray(array)
                 sessionStorage.setItem('characterArray',  JSON.stringify(shuffled))
                 sessionStorage.setItem('goodPeopleCount',3)
@@ -86,7 +87,7 @@
     <!-- Main Section -->
     <div class="flex items-center justify-center h-screen ">
         <div class="p-4">
-            <div class="text-center rounded-md bg-indigo-50 px-2.5 py-2.5 text-xl font-bold text-indigo-600 shadow-sm hover:bg-indigo-100">Welcome to Avalon Digital</div>
+            <div class="text-center rounded-md bg-indigo-50 px-2.5 py-2.5 text-xl font-bold text-indigo-600 shadow-sm hover:bg-indigo-100">Welcome to Avalon Mobile</div>
             <label for="num" class="pt-4 block text-sm font-medium leading-6 text-gray-900">Enter how many people are playing the game:</label>
             <div class="mt-2">
                 <input type="number" name="num" id="num"
