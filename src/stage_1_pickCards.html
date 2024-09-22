@@ -60,36 +60,54 @@
         const goodCount = sessionStorage.getItem('goodPeopleCount')
         const evilCount = sessionStorage.getItem('evilPeopleCount')
 
+        // Mapping character names to image URLs
+            const characterImages = {
+                "Merlin(Good)-'Knows evil, must remain hidden'": "./images/Merlin.png",
+                "Assassin(Evil)-'Minion of Mordred'":"./images/Assassin.png",
+                "Percivel(Good)-'Knows Merlin'":"./images/Percival.png",
+                "Morgana(Evil)-'Appears as Merlin'":"./images/Morgana.png"
+            };
+
         if (playersNum) {
 
             //document.getElementById('player-count').innerText = `Players: ${playersNum}`;
-            document.getElementById('role-call').innerText = `Good people count: ${goodCount}
-            Evil People count: ${evilCount}`
+            document.getElementById('role-call').innerText = `Good character count: ${goodCount}
+            Evil character count: ${evilCount}`
 
 
             const listContainer = document.getElementById('array-list');
             
             storedArray.forEach((item, index) => {
                 const li = document.createElement('li');  // Create a new <li> element
-                //li.textContent = `Player ${index + 1}: ${item}`;  // Set the text content of the <li>
-                li.className = "h-60 flex flex-col rounded-lg bg-blue-100 items-center justify-center shadow";
+                li.className = "relative h-96 flex flex-col rounded-lg bg-blue-100 items-center justify-center shadow";
 
                 const playerDiv = document.createElement('div');
                 playerDiv.textContent = `Player ${index + 1}`;
-                playerDiv.className = " text-center border-4 border-red-400";
+                playerDiv.className = "absolute top-4 text-center text-gray-800 font-semibold";
 
                 const charRole = document.createElement('div');
-                charRole.textContent = `Your character is: ${item}`;
-                charRole.className = "visible hidden border-4 border-blue-400";
+                charRole.textContent = `${item}`;
+                charRole.className = "visible hidden";
+
+
+                // Create the image element
+                const charImage = document.createElement('img');
+                charImage.className = "absolute bottom-2 w-full pt-4 h-72 object-contain visible hidden"; // Tailwind or other CSS styling
+                charImage.src = characterImages[item]; // Use default image if character is not found
+
+
 
                 // Add the onclick event listener for each <li> element
                 li.onclick = function () {
                     // Toggle the 'hidden' class to show/hide the element
                     charRole.classList.toggle('hidden')
+                    charImage.classList.toggle('hidden')
 
                 };
+                playerDiv.append(charRole)
                 //playerDiv.appendChild(charRole);
-                li.append(playerDiv, charRole);
+                li.append(playerDiv, charImage);
+                
                 
                 listContainer.appendChild(li);  // Append the <li> to the list container
             });
