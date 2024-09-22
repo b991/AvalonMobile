@@ -7,14 +7,32 @@
     <link href="./src/output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+
+//Stage 1:  Character Selection
         // Function to record the number entered by the user
         function recordNumber() {
-            common_good = "Loyal Servant of Arthur(Good)"
-            common_evil = "Minion of Mordred(Evil)"
-            assassin = "Assassin(Evil)-'Minion of Mordred'"
-            merlin = "Merlin(Good)-'Knows evil, must remain hidden'"
-            perc = "Percivel(Good)-'Knows Merlin'"
-            morgana = "Morgana(Evil)-'Appears as Merlin'"
+            // Define an array to hold all good characters
+            let goodCharacters = [
+                "Loyal Servant of Arthur(Good1)",
+                "Loyal Servant of Arthur(Good2)",
+                "Loyal Servant of Arthur(Good3)",
+                "Loyal Servant of Arthur(Good4)",
+                "Loyal Servant of Arthur(Good5)"
+            ];
+
+            // Define an array to hold all evil characters
+            let evilCharacters = [
+                "Minion of Mordred(Evil1)",
+                "Minion of Mordred(Evil2)",
+                "Minion of Mordred(Evil3)"
+            ];
+
+            let assassin = "Assassin(Evil)-'Minion of Mordred'"
+            let merlin = "Merlin(Good)-'Knows evil, must remain hidden'"
+            let perc = "Percivel(Good)-'Knows Merlin'"
+            let morgana = "Morgana(Evil)-'Appears as Merlin'"
+            let mordred = "Unknown to Merlin"
+            let oberon = "Unknown to Evil"
 
             
             function shuffleArray(arr) {
@@ -31,11 +49,14 @@
             // Convert input to a number
             let parsedNumber = parseInt(numInput);
 
-            // Create characters
+//Stage 1.5: Create characters based on num of player
             // Game has common good (0), common evil(1), Merlin (2), Percival(3) and Morgana(4) built in. 
             if(parsedNumber==5){
                 // 3 good, 2 evil
-                let array = [common_good,merlin,perc,assassin, morgana]
+                const chooseGood = Math.floor(Math.random() * 5) + 1;
+                let selectedGoodCharacter = goodCharacters[chooseGood]; // Access good1, good2, etc.
+
+                let array = [selectedGoodCharacter,merlin,perc,assassin,morgana]
                 shuffled = shuffleArray(array)
                 sessionStorage.setItem('characterArray',  JSON.stringify(shuffled))
                 sessionStorage.setItem('goodPeopleCount',3)
@@ -46,6 +67,14 @@
             // Store info 
             sessionStorage.setItem('playersNum', parsedNumber);
 
+//Stage 2: Team Builiding. [x,y]: x is the number of quest, y is the num of players
+            let firstQ = [2,2,2,3,3,3]
+            let secondQ = [3, 3, 3, 4, 4, 4]
+            let thirdQ = [2,4,3,4,4,4]
+            let fourthQ = [3,3,4,5,5,5]
+            let fifthQ = [3,4,4,5,5,5]
+            questPlayerGrid = [firstQ, secondQ,thirdQ, fourthQ, fifthQ]
+            sessionStorage.setItem('questPlayerGrid', JSON.stringify(questPlayerGrid))
 
             // Get the message element
             let messageElement = document.getElementById("warning_message");
@@ -60,7 +89,7 @@
         }
     </script>
 </head>
-<body >
+<body class="h-screen relative">
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
         <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
@@ -69,14 +98,13 @@
     <!-- Acutal Content Begins -->
 
     <!-- Navbar -->
-    <nav class="bg-indigo-600">
+    <nav class="bg-indigo-600 absolute top-0 w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Desktop Menu Links -->
                 <div class="md:flex space-x-4">
                     <a href="/index.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Home</a>
                     <a href="./src/stage_1_pickCards.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select Characters</a>
-                    <a href="./src/test.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Services</a>
+                    <a href="./src/stage_2_teamBuilding.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team Building</a>
                     <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
                 </div>
 
@@ -103,11 +131,6 @@
     </div>
 
     <!-- Acutal Content Ends -->
-    <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        aria-hidden="true">
-        <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-        </div>
-    </div>
+
 </body>
 </html>

@@ -7,7 +7,7 @@
     <link href="./src/output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body >
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
         <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
@@ -20,11 +20,12 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Desktop Menu Links -->
                 <div class="md:flex space-x-4">
-                    <a href="/index.html"
+                    <a href="../index.html"
                         class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Home</a>
                     <a href="stage_1_pickCards.html"
                         class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select Characters</a>
-                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Services</a>
+                    <a href="stage_2_teamBuilding.html"
+                        class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team Building</a>
                     <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
                 </div>
     
@@ -34,7 +35,7 @@
     </nav>
 
     <!-- Actual Content Begins -->
-    <div class="m-8 text-center text-xl text-gray-700 font-bold"> Tap your card to view your identity.<br>
+    <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Tap your card to view your identity.<br>
         Tap again to hide it.
     </div>
 
@@ -43,6 +44,35 @@
 
 
     <ul id="array-list" class="m-4 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></ul>
+
+
+    <!-- Narration -->
+    <div class="mt-32 mb-4 text-center text-xl text-gray-700 font-bold"> Narration Script</div>
+    <div class = "text-left px-16 text-lg ">
+        "Everyone close your eyes and extend your hand into a fist in front of you"<br>
+        "Minions of Mordred, <span class="text-yellow-600 font-semibold">not Oberon</span>, open your eyes and look around so that you know al agents of Evil"<br>
+        "Minions of Mordred close your eyes"<br>
+        "All players should have their eyes closed and hands in a fist in front of them"<br>
+        "Minions of Mordred, <span class="text-yellow-600 font-semibold">not Mordred him self</span> - extend your thumb so that Merlin will know of you"<br>
+        "Merlin, open your eyes and see the agents of Evil"<br>
+        "Minions of Mordred - put your thumbs down and re-form your hand into a fist"<br>
+        "Merlin, close your eyes"<br>
+        "All players should have their eyes closed and hands in a fist in front of them"<br>
+        <span class="text-yellow-600 font-semibold">
+        "Merlin & Morgana - extend your thumb so that Percival may know of you"<br>
+        "Percival, open your eyes so uoy may wonk Merlin & Morgana"<br>
+        "Merlin & Morgana- put your thumbs down and form your hand into a fist"<br>
+        "Percival, colse your eyes"<br>
+        "All players should have their eyes closed and hands in a fist infront of them"<br>
+        </span>
+        "Everyone open your eyes"<br>
+
+        <div class="text-sm pt-4 text-yellow-600">**Yellow text are optional with optional cards</div>
+
+    </div>
+
+
+
 
     <!-- Actual Content Ends -->
     <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
@@ -65,7 +95,20 @@
                 "Merlin(Good)-'Knows evil, must remain hidden'": "./images/Merlin.png",
                 "Assassin(Evil)-'Minion of Mordred'":"./images/Assassin.png",
                 "Percivel(Good)-'Knows Merlin'":"./images/Percival.png",
-                "Morgana(Evil)-'Appears as Merlin'":"./images/Morgana.png"
+                "Morgana(Evil)-'Appears as Merlin'":"./images/Morgana.png",
+                "Loyal Servant of Arthur(Good1)":"./images/Good1.png",
+                "Loyal Servant of Arthur(Good2)": "./images/Good2.png",
+                "Loyal Servant of Arthur(Good3)": "./images/Good3.png",
+                "Loyal Servant of Arthur(Good4)": "./images/Good4.png",
+                "Loyal Servant of Arthur(Good5)": "./images/Good5.png",
+
+                "Minion of Mordred(Evil1)": "./images/Evil1.png",
+                "Minion of Mordred(Evil2)": "./images/Evil2.png",
+                "Minion of Mordred(Evil3)": "./images/Evil3.png",
+
+                "Unknown to Merlin":"./images/Mordred.png",
+                "Unknown to Evil":"./images/Oberon.png"
+                
             };
 
         if (playersNum) {

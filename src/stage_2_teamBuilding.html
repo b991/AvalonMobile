@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+        </div>
+    </div>
+    <!-- Acutal Content Begins -->
+    <!-- Navbar -->
+    <nav class="bg-indigo-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Desktop Menu Links -->
+                <div class="md:flex space-x-4">
+                    <a href="../index.html"
+                        class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Home</a>
+                    <a href="stage_1_pickCards.html"
+                        class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select
+                        Characters</a>
+                    <a href="stage_2_teamBuilding.html"
+                        class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team Building</a>
+                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
+                </div>
+
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="grid grid-cols-3 gap-4" id="dynamicGrid"></div>
+        <!-- Dynamic grid content will be populated here -->
+    </div>
+
+    <div class="m-8">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">Last 30 days</h3>
+        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <dt class="truncate text-sm font-medium text-gray-500">Total Subscribers</dt>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">71,897</dd>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <dt class="truncate text-sm font-medium text-gray-500">Avg. Open Rate</dt>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">58.16%</dd>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <dt class="truncate text-sm font-medium text-gray-500">Avg. Click Rate</dt>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">24.57%</dd>
+            </div>
+        </dl>
+    </div>
+
+    <!-- Actual Content Ends -->
+
+<script>
+    const gridContainer = document.getElementById('dynamicGrid');
+    const questPlayerData = JSON.parse(sessionStorage.getItem("questPlayerGrid"));  // Retrieve and parse it back into an array
+    console.log(questPlayerData)
+    const data = questPlayerData;
+    // Function to populate the grid
+    function populateGrid(data) {
+        data.forEach(row => {
+            row.forEach(item => {
+                const cell = document.createElement('div');
+                cell.className = "grid-cell flex items-center justify-center bg-blue-500 text-white rounded-lg shadow";
+                cell.textContent = item;
+                gridContainer.appendChild(cell);
+            });
+        });
+    }
+
+    // Call the function to populate the grid
+    populateGrid(data);
+</script>
+
+
+</body>
+</html>
