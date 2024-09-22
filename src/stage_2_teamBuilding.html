@@ -28,57 +28,89 @@
                         Characters</a>
                     <a href="stage_2_teamBuilding.html"
                         class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team Building</a>
-                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
+                    <a href="stage_3_quest.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Quest</a>
                 </div>
 
             </div>
         </div>
 
     </nav>
+    <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Stage 2: Team Building
+    </div>
+    <div class="mt-4 mb-6 text-center text-md text-blue-700 font-semibold" id="displayQuestNum">
+    </div>
+    <div class="px-16 text-gray-600 font-serif italic"> It is a time for great decisions and strong leaders. 
+    Not all knights and ladies of Avalon are loyal ot Arthur, and yet you
+    must choose only those that are Good to represent Arthur in his quests. If an open ear and eye is kept, Merlin's sage
+    advice can be discerned as whispers of truth.
+    </div>
 
-    <div class="grid grid-cols-3 gap-4" id="dynamicGrid"></div>
-        <!-- Dynamic grid content will be populated here -->
+    <div class="mt-8 px-16 text-md text-gray-700 font-bold"> 
+    Team Assignment: After appropriate discussion, the Leader takes the required number of Team Tokens (using the folowing
+    chart, or numbers on the tableau) and assigns each Team Token to any player.
+    </div>
+    <div class="flex justify-center mt-4">
+        <img src="images/TeamBuildingTableau.png" class="h-44 object-contain rounded-lg shadow-lg">
+    </div>
+
+
+    <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold">
+        Please choose <span id="tokens" class="text-blue-600"></span> players to represent Aurther in his quest 
     </div>
 
     <div class="m-8">
-        <h3 class="text-base font-semibold leading-6 text-gray-900">Last 30 days</h3>
-        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Total Subscribers</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">71,897</dd>
-            </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Avg. Open Rate</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">58.16%</dd>
-            </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Avg. Click Rate</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">24.57%</dd>
-            </div>
+        <h3 class="text-base font-semibold leading-6 text-gray-900 text-center">Vote tracker: 
+            Evil wins the game if there are <span class="text-red-500">5</span> consecutive failed votes! 
+        </h3>
+        <dl class="flex gap-8 justify-center mt-8">
+        <!-- Square Button -->
+        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)" >
+            Track Failure
+        </button>
+        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
+            Track Failure
+        </button>
+        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
+            Track Failure
+        </button>
+        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
+            Track Failure
+        </button>
+        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
+            Track Failure
+        </button>
         </dl>
+    </div>
+
+    <div class="flex justify-center">
+        <button onclick="progress()" class="h-16 w-32 bg-green-700 text-white font-bold rounded-lg">Move On To Quest</button>
     </div>
 
     <!-- Actual Content Ends -->
 
 <script>
-    const gridContainer = document.getElementById('dynamicGrid');
-    const questPlayerData = JSON.parse(sessionStorage.getItem("questPlayerGrid"));  // Retrieve and parse it back into an array
-    console.log(questPlayerData)
-    const data = questPlayerData;
-    // Function to populate the grid
-    function populateGrid(data) {
-        data.forEach(row => {
-            row.forEach(item => {
-                const cell = document.createElement('div');
-                cell.className = "grid-cell flex items-center justify-center bg-blue-500 text-white rounded-lg shadow";
-                cell.textContent = item;
-                gridContainer.appendChild(cell);
-            });
-        });
+    const playersNum = sessionStorage.getItem('playersNum');
+    const questPlayerGrid = JSON.parse(sessionStorage.getItem("questPlayerGrid"));  // Retrieve and parse it back into an array
+    let questNum = sessionStorage.getItem('questNum');
+
+    let displayQuestNum = document.getElementById("displayQuestNum");
+    displayQuestNum.innerText = `We have ${playersNum} players. This is quest number ${questNum}.`;
+    let idxplayer = playersNum -5
+    let idxquest = questNum - 1
+
+    const teamtoken = questPlayerGrid[idxquest][idxplayer]
+    let displayToken = document.getElementById("tokens");
+    displayToken.innerText = `${teamtoken}`;
+
+    function makeRed(button) {
+        button.classList.toggle('bg-red-500');
     }
 
-    // Call the function to populate the grid
-    populateGrid(data);
+    function progress() {
+        window.location.href = "stage_3_quest.html";
+    }
+
+
 </script>
 
 

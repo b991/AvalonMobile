@@ -26,7 +26,7 @@
                         class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select Characters</a>
                     <a href="stage_2_teamBuilding.html"
                         class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team Building</a>
-                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
+                    <a href="stage_3_quest.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Quest</a>
                 </div>
     
             </div>
@@ -35,8 +35,15 @@
     </nav>
 
     <!-- Actual Content Begins -->
-    <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Tap your card to view your identity.<br>
-        Tap again to hide it.
+    <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Stage 1: Evil reveals itself, and Merlin looks into the future
+    </div>
+    <div class="px-16 text-gray-600 font-serif italic">
+    True Evil is rampant in the land. Arthur represents the future of this land, a promise of prosperity and honor, yet hidden
+    among his brave wariors are Mordreds' unscrupulous minions. These forces of Evil are few in number but have knowledge of
+    each other and remain hidden from all but one of Arthur's servants. Merlin alone knows the agents of Evil, but he must
+    speak of this only in riddles. If his true identity is discovered all will be lost.</div>
+    <div class="mt-8 text-center text-md text-gray-700 font-bold"> Tap your card to view your identity.<br>
+    Tap again to hide it.
     </div>
 
     <!-- <div id="player-count" class="text-center text-gray-700"></div> -->
@@ -89,7 +96,7 @@
         const arrlen = storedArray.length
         const goodCount = sessionStorage.getItem('goodPeopleCount')
         const evilCount = sessionStorage.getItem('evilPeopleCount')
-
+        console.log(storedArray)
         // Mapping character names to image URLs
             const characterImages = {
                 "Merlin(Good)-'Knows evil, must remain hidden'": "./images/Merlin.png",
@@ -148,7 +155,6 @@
 
                 };
                 playerDiv.append(charRole)
-                //playerDiv.appendChild(charRole);
                 li.append(playerDiv, charImage);
                 
                 

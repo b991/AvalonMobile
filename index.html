@@ -53,9 +53,8 @@
             // Game has common good (0), common evil(1), Merlin (2), Percival(3) and Morgana(4) built in. 
             if(parsedNumber==5){
                 // 3 good, 2 evil
-                const chooseGood = Math.floor(Math.random() * 5) + 1;
+                const chooseGood = Math.floor(Math.random() * 5);
                 let selectedGoodCharacter = goodCharacters[chooseGood]; // Access good1, good2, etc.
-
                 let array = [selectedGoodCharacter,merlin,perc,assassin,morgana]
                 shuffled = shuffleArray(array)
                 sessionStorage.setItem('characterArray',  JSON.stringify(shuffled))
@@ -75,6 +74,7 @@
             let fifthQ = [3,4,4,5,5,5]
             questPlayerGrid = [firstQ, secondQ,thirdQ, fourthQ, fifthQ]
             sessionStorage.setItem('questPlayerGrid', JSON.stringify(questPlayerGrid))
+            sessionStorage.setItem('questNum',1)
 
             // Get the message element
             let messageElement = document.getElementById("warning_message");
@@ -105,7 +105,7 @@
                     <a href="/index.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Home</a>
                     <a href="./src/stage_1_pickCards.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select Characters</a>
                     <a href="./src/stage_2_teamBuilding.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team Building</a>
-                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
+                    <a href="./src/stage_3_quest.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Quest</a>
                 </div>
 
             </div>
