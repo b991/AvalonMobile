@@ -37,6 +37,9 @@
                 let array = [common_good,merlin,perc,common_evil, morgana]
                 shuffled = shuffleArray(array)
                 sessionStorage.setItem('characterArray',  JSON.stringify(shuffled))
+                sessionStorage.setItem('goodPeopleCount',3)
+                sessionStorage.setItem('evilPeopleCount', 2)
+
             }
 
             // Store info 
@@ -71,8 +74,8 @@
                 <!-- Desktop Menu Links -->
                 <div class="md:flex space-x-4">
                     <a href="/index.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Home</a>
-                    <a href="./src/stage_1_pickCards.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">About</a>
-                    <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Services</a>
+                    <a href="./src/stage_1_pickCards.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select Characters</a>
+                    <a href="./src/test.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Services</a>
                     <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Contact</a>
                 </div>
 
