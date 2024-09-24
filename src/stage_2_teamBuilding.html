@@ -71,7 +71,7 @@
     </div>
 
     <div class="flex justify-center">
-        <button onclick="progress()" class="h-16 w-32 bg-indigo-300 font-bold rounded-lg">Move On To Quest</button>
+        <button onclick="progress()" class="h-16 w-32 bg-indigo-300 font-bold rounded-lg">Next Step</button>
     </div>
 
     <div class="mt-8 px-16 text-md text-gray-700">
@@ -96,6 +96,7 @@
     const playersNum = sessionStorage.getItem('playersNum');
     const questPlayerGrid = JSON.parse(sessionStorage.getItem("questPlayerGrid"));  // Retrieve and parse it back into an array
     let questNum = sessionStorage.getItem('questNum');
+    console.log(questNum)
 
     let displayQuestNum = document.getElementById("displayQuestNum");
     displayQuestNum.innerText = `We have ${playersNum} players. This is quest number ${questNum}.`;

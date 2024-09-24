@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- To do: 
-1. Fix master game tracker
-2. Increase the game quest number
-3. Make sure to make game availble for 6+ players -->
+1. Fix master game tracker: Complete
+2. Increase the game quest number: Complete
+3. Make sure to make game availble for 6+ players 
+4. test fail condition when more players in 4th round -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,56 +60,125 @@
     </div>
 
     <div class="flex justify-center space-x-4">
-        <button onclick="checkResult()" class="bg-indigo-300 py-2 px-2 font-bold rounded-lg">Check Quest Result:</button>
+        <button onclick="checkResult()" class="bg-indigo-300 py-3 px-2 font-bold rounded-lg">Click For Result:</button>
         <div id="questResult" class="py-2 px-2 font-bold rounded-lg"></div> <!-- Result display area -->
     </div>
 
     <!-- Master Quest Tracker -->
 
+    <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Automatic Quest Tracker
+    </div>
+    <div class="m-8">
+        <dl class="flex gap-8 justify-center mt-8">
+            <button class="h-16 w-32 font-bold bg-gray-300 rounded-lg questB">
+                Quest 1
+            </button>
+            <button class="h-16 w-32 font-bold bg-gray-300 rounded-lg questB">
+                Quest 2
+            </button>
+            <button class="h-16 w-32 font-bold bg-gray-300  rounded-lg questB">
+                Quest 3
+            </button>
+            <button class="h-16 w-32 font-bold bg-gray-300 rounded-lg questB" >
+                Quest 4
+            </button>
+            <button class="h-16 w-32  font-bold bg-gray-300 rounded-lg questB" >
+                Quest 5
+            </button>
+        </dl>
+    </div>
 
-    <div class="mt-8 px-16 text-md text-gray-700 font-bold">
+
+
+    <div class="flex justify-center space-x-4">
+        <button onclick="nextQuest()" class="text-lg bg-indigo-300 py-3 px-6 font-bold rounded-lg">Next Quest</button>
+        <div id="nextStep" class="py-3 px-4 font-bold rounded-lg self-center"> <!-- Result display area -->
+            <!-- Display results here -->
+        </div>
+    </div>
+
+    <div class="mt-8 px-16 text-md text-gray-700 ">
+    The game ends immediately after either 3 successful or 3 failed Quests. The Evil players win if 3 Quests
+    fail. The game also ends immediately and the Evil players win if five Teams are rejected in a single round.
+    </div>
+
+    <div class="mt-8 px-16 text-md text-gray-700 ">
+    If three Quests are completed successfuly, the Evil players wil have a final opportunity to win the game by correctly
+    naming which of the Good players is Merlin. Without revealing any Character cards, the Evil players discuss and the
+    player with the Assassin character card wil name one Good
+    player as Merlin. If the named player is Merlin, then Evil players win. If the Evil players do not name Merlin then the
+    Good players win.
+    </div>
+
+    <div class="mt-8 px-16 text-md text-gray-700">
         Note: The Good players must select the Quest Suces card; Evil may select either hte Quest Suces or Quest Fail
         card.<br>
     </div>
-    <div class="mt-8 px-16 text-md text-gray-700 font-bold">
+    <div class="my-8 px-16 text-md text-gray-700 ">
         Note: The 4th Quest (and only the 4th Quest) in games of 7 or more players requires at least two Quest Fail cards to
         be a failed Quest.
     </div>
+
     <!-- Actual Content Ends -->
 
     <script>
 
         const playersNum = sessionStorage.getItem('playersNum');
+        let intPlayerNum = parseInt(playersNum);
         const questPlayerGrid = JSON.parse(sessionStorage.getItem("questPlayerGrid"));  // Retrieve and parse it back into an array
         let questNum = sessionStorage.getItem('questNum');
+        let intQuestNum = parseInt(questNum);
         const questResult = JSON.parse(sessionStorage.getItem("questResult"));
         console.log(questResult)
 
+
         let displayQuestNum = document.getElementById("displayQuestNum");
         displayQuestNum.innerText = `We have ${playersNum} players. This is quest number ${questNum}.`;
-        let idxplayer = playersNum - 5;
-        let idxquest = questNum - 1;
+        let idxplayer = intPlayerNum - 5;
 
-        const teamtoken = questPlayerGrid[idxquest][idxplayer]
+
+        const teamtoken = questPlayerGrid[intQuestNum-1][idxplayer]
         let intToken = parseInt(teamtoken);
-        let intPlayerNum = parseInt(playersNum);
-        let intQuestNum = parseInt(questNum)
 
 
+        // Function to assign button colors based on array values
+        function assignButtonColors(resultMessage) {
+            const buttons = document.querySelectorAll('.questB');
+
+            // Loop through the buttons and the results array
+            buttons.forEach((button, index) => {
+                // Get the result for the current index
+                const result = questResult[index];
+
+                // Assign colors based on the result
+                if (result == 0) {
+                    button.classList.add('bg-green-300');
+                    button.classList.remove('bg-red-300');
+
+                } else if (result == 1) {
+                    button.classList.add('bg-red-300');
+                    button.classList.remove('bg-green-300');
+
+                }
+            });
+
+            
+        }
         const voterSection = document.getElementById("playerVote");
         const playerChoices = [];  // Array to store the results
 
+        for(i = 0; i < intToken; i ++){
+            playerChoices.push(-1)
+        }
 
         function recordSelection(i,selectedChoice) {
             //check the logic to append to playerChoices list
-            idx = i - 1
-            console.log(`len of player hcoies ${playerChoices.length}`)
-            if (playerChoices.length > idx) {
-                playerChoices[idx] = selectedChoice
-            }else{
-                playerChoices.push(selectedChoice)
-            }
             console.log(playerChoices)
+            console.log(i)
+            idx = i - 1
+
+            playerChoices[idx] = selectedChoice
+
         } 
         if(playersNum){
             for(let i = 1; i <= intToken; i++){
@@ -140,10 +210,21 @@
                 const confirm = document.createElement('div')
                 confirm.className = "visible my-2 text-center font-serif italic text-gray-700 mt-5"
 
+                const cardRecordSelection = document.createElement('div')
+                cardRecordSelection.className = "visible hidden my-2 text-center font-serif italic text-gray-700 mt-5"
+                cardRecordSelection.textContent = "Your selection is recorded"
+
                 // Add the onclick event listener for each <li> element
                 playerDiv.onclick = function () {
                     content.classList.toggle('hidden')
                     playerDiv.classList.toggle("bg-indigo-400")
+
+                    if (!content.classList.contains('hidden')) {
+                        cardRecordSelection.classList.add('hidden');
+                    }else if(content.classList.contains('hidden') && (playerChoices[i-1] == 0 || playerChoices[i - 1] == 1)){
+                        cardRecordSelection.classList.remove('hidden');
+                    }
+
                 };
 
                 // To store which option the player has selected
@@ -169,15 +250,18 @@
                 bContainer.append(completeQ,failQ)
                 content.append(prompt, bContainer, confirm)
 
-                li.append(playerDiv, content);
+                li.append(playerDiv,cardRecordSelection ,content);
                 voterSection.appendChild(li);  // Append the <li> to the list container
             }
         }
 
-        //fail is recorded as 1, success is 0 
+        //fail is recorded as 1, success is 0. 
+        // An important function. This function updates questResult in storage.
         function checkResult() {
             const resultDiv = document.getElementById('questResult');
-            if (playerChoices.length>0){
+            const allPositive = playerChoices.every(num => num >= 0);
+
+            if (allPositive){
                 let resultMessage;
                 const countOfOnes = playerChoices.filter(num => num == 1).length;
                 if (countOfOnes < 1) {
@@ -190,14 +274,62 @@
                 resultDiv.textContent = resultMessage;
                 if (resultMessage == "success"){
                     resultDiv.classList.add("bg-green-200")
+                    resultDiv.classList.remove("bg-red-200")
                 }else if(resultMessage=="fail"){
                     resultDiv.classList.add("bg-red-200")
+                    resultDiv.classList.remove("bg-green-200")
                 }
+                if (resultMessage == "success") {
+                    questResult[intQuestNum-1] = 0
+                } else if (resultMessage == "fail") {
+                    questResult[intQuestNum - 1] = 1
+                }
+                assignButtonColors(resultMessage)
+                sessionStorage.setItem('questResult', JSON.stringify(questResult))
             }else{
-                resultDiv.textContent = "No quest choices are made."; // Handle case where no choices exist
+                resultDiv.textContent = "Quest Incomplete"; // Handle case where no choices exist
             }
         }
 
+
+        // Call assignButtonColors when the page becomes visible
+        document.addEventListener('visibilitychange', function () {
+                if (document.visibilityState === 'visible') {
+                    assignButtonColors(null);
+                }
+            });
+        // Handle page show event to account for cached pages
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                assignButtonColors(null);
+            }
+        });
+        // Call assignButtonColors on page load
+        window.onload = assignButtonColors(null);
+
+        // An important function. It updates the questNum on storage
+        function nextQuest(){
+            const nextStep = document.getElementById("nextStep");
+
+            let posZeroC = 0;
+
+            questResult.forEach(num => {
+                if (num >= 0) {
+                    posZeroC++;
+                }
+            });
+
+            if(posZeroC == intQuestNum){
+                intQuestNum += 1
+                sessionStorage.setItem('questNum', intQuestNum)
+                window.location.href = "stage_2_teamBuilding.html";
+
+            }else{
+                nextStep.textContent = "Complete Quest First"
+
+            }
+
+        }
     </script>
 
 
