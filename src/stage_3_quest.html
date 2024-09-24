@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- To do: 
+1. Fix master game tracker
+2. Increase the game quest number
+3. Make sure to make game availble for 6+ players -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,61 +43,160 @@
     </nav>
     <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Stage 3: Quest
     </div>
-    <div class="mt-4 mb-6 text-center text-md text-blue-700 font-semibold" id="displayQuestNum">
+    <div class="mt-4 mb-6 text-center text-md font-semibold" id="displayQuestNum"></div>
     </div>
     <div class="px-16 text-gray-600 font-serif italic"> You have debated well and wisely chosen the brave knights and ladies with whom you place your trust. 
-    Now it is time to measure a person's true intent and loyalty to the noble cause for which Arthur fights.
+    Now it is time to measure a person's true intent and loyalty to the noble cause for which Arthur fights.<br>
+    The selected knights and ladies are embarking on their quest. The whole Avalon is waiting for their success. 
+    </div>
+    <div class="mt-8 text-center text-md text-gray-700 font-bold"> Tap card title to go on quest.<br>
+        Make sure to tap again to hide your selection.
     </div>
 
+    <div class="m-4 justify-center">
+        <ul id="playerVote" class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        </ul>        
+    </div>
+
+    <div class="flex justify-center space-x-4">
+        <button onclick="checkResult()" class="bg-indigo-300 py-2 px-2 font-bold rounded-lg">Check Quest Result:</button>
+        <div id="questResult" class="py-2 px-2 font-bold rounded-lg"></div> <!-- Result display area -->
+    </div>
+
+    <!-- Master Quest Tracker -->
+
+
     <div class="mt-8 px-16 text-md text-gray-700 font-bold">
-        Note: The Good players must select hte Quest Suces card; Evil may select either hte Quest Suces or Quest Fail card.<br>
+        Note: The Good players must select the Quest Suces card; Evil may select either hte Quest Suces or Quest Fail
+        card.<br>
     </div>
     <div class="mt-8 px-16 text-md text-gray-700 font-bold">
         Note: The 4th Quest (and only the 4th Quest) in games of 7 or more players requires at least two Quest Fail cards to
         be a failed Quest.
     </div>
-
-
-    <ul id="playerVote" class="m-4 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    </ul>
-
-
-    <div class="flex justify-center">
-        <button class="h-16 w-32 bg-green-700  text-white font-bold rounded-lg">Move On To Quest</button>
-    </div>
-
     <!-- Actual Content Ends -->
 
     <script>
+
         const playersNum = sessionStorage.getItem('playersNum');
         const questPlayerGrid = JSON.parse(sessionStorage.getItem("questPlayerGrid"));  // Retrieve and parse it back into an array
         let questNum = sessionStorage.getItem('questNum');
+        const questResult = JSON.parse(sessionStorage.getItem("questResult"));
+        console.log(questResult)
 
         let displayQuestNum = document.getElementById("displayQuestNum");
         displayQuestNum.innerText = `We have ${playersNum} players. This is quest number ${questNum}.`;
-        let idxplayer = playersNum - 5
-        let idxquest = questNum - 1
+        let idxplayer = playersNum - 5;
+        let idxquest = questNum - 1;
 
         const teamtoken = questPlayerGrid[idxquest][idxplayer]
-        let intToken = parseInt(teamtoken)
+        let intToken = parseInt(teamtoken);
+        let intPlayerNum = parseInt(playersNum);
+        let intQuestNum = parseInt(questNum)
 
 
         const voterSection = document.getElementById("playerVote");
+        const playerChoices = [];  // Array to store the results
 
+
+        function recordSelection(i,selectedChoice) {
+            //check the logic to append to playerChoices list
+            idx = i - 1
+            console.log(`len of player hcoies ${playerChoices.length}`)
+            if (playerChoices.length > idx) {
+                playerChoices[idx] = selectedChoice
+            }else{
+                playerChoices.push(selectedChoice)
+            }
+            console.log(playerChoices)
+        } 
         if(playersNum){
             for(let i = 1; i <= intToken; i++){
-                let li = document.createElement('li');  // Create a new <li> element
-                li.className = "relative h-96 flex flex-col rounded-lg bg-blue-100 items-center justify-center shadow";
-                voterSection.appendChild(li);
+                const li = document.createElement('li');  // Create a new <li> element
+                li.className = "relative h-96 flex flex-col rounded-lg bg-blue-100 items-center shadow my-2";
+
+                const playerDiv = document.createElement('div');
+                playerDiv.textContent = `Knight ${i}: Go On Quest`;
+                playerDiv.className = "mt-3 hover:cursor-pointer bg-indigo-200 px-2 py-1 rounded-lg top-4 text-center text-gray-800 font-semibold ";
+
+                const content = document.createElement('div');
+                content.className = "visible hidden";
+
+                const bContainer = document.createElement('div')
+                bContainer.className = "flex justify-center space-x-4";
+
+                const prompt = document.createElement('div');
+                prompt.textContent = "You want quest to success or fail?"
+                prompt.className = "text-center font-serif italic text-gray-700 mt-5"
+
+                const completeQ = document.createElement('button')
+                completeQ.textContent = "Success it"
+                completeQ.className = "mt-3 hover:cursor-pointer bg-indigo-200 px-2 py-1 rounded-lg top-4 text-center text-gray-800 font-semibold"
+
+                const failQ = document.createElement('button')
+                failQ.textContent = "Fail it"
+                failQ.className = "mt-3 hover:cursor-pointer bg-indigo-200 px-2 py-1 rounded-lg top-4 text-center text-gray-800 font-semibold"
+
+                const confirm = document.createElement('div')
+                confirm.className = "visible my-2 text-center font-serif italic text-gray-700 mt-5"
+
+                // Add the onclick event listener for each <li> element
+                playerDiv.onclick = function () {
+                    content.classList.toggle('hidden')
+                    playerDiv.classList.toggle("bg-indigo-400")
+                };
+
+                // To store which option the player has selected
+                let selectedChoice = null;
+
+                // Add event listener for "Fail Quest" button
+                failQ.addEventListener('click', () => { 
+                    selectedChoice = 1;  // Mark this choice as selected
+                    failQ.classList.toggle('bg-red-400')
+                    completeQ.classList.remove('bg-green-400')
+                    confirm.textContent = `You choose to fail the Quest. Click card title to hide your selection.`
+                    recordSelection(i,selectedChoice);
+                });
+
+                // Add event listener for "Success Quest" button
+                completeQ.addEventListener('click', () => {
+                    selectedChoice = 0;  // Mark this choice as selected
+                    completeQ.classList.toggle('bg-green-400')
+                    failQ.classList.remove('bg-red-400')
+                    confirm.textContent = `You choose to success the Quest. Click card title to hide your selection.`
+                    recordSelection(i,selectedChoice);
+                });
+                bContainer.append(completeQ,failQ)
+                content.append(prompt, bContainer, confirm)
+
+                li.append(playerDiv, content);
+                voterSection.appendChild(li);  // Append the <li> to the list container
             }
         }
 
-        function makeRed(button) {
-            button.classList.toggle('bg-red-500');
+        //fail is recorded as 1, success is 0 
+        function checkResult() {
+            const resultDiv = document.getElementById('questResult');
+            if (playerChoices.length>0){
+                let resultMessage;
+                const countOfOnes = playerChoices.filter(num => num == 1).length;
+                if (countOfOnes < 1) {
+                    resultMessage = "success"; // If there are no ones, return success
+                }else if (intPlayerNum >= 7 && intQuestNum == 4 && countOfOnes < 2) {
+                    resultMessage = "success"; // If it's the 4th quest and there are 2 or more ones, return fail
+                }else{
+                    resultMessage = "fail"; // For all other cases, return fail
+                }
+                resultDiv.textContent = resultMessage;
+                if (resultMessage == "success"){
+                    resultDiv.classList.add("bg-green-200")
+                }else if(resultMessage=="fail"){
+                    resultDiv.classList.add("bg-red-200")
+                }
+            }else{
+                resultDiv.textContent = "No quest choices are made."; // Handle case where no choices exist
+            }
         }
-
-
-
 
     </script>
 

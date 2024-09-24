@@ -37,20 +37,10 @@
     </nav>
     <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Stage 2: Team Building
     </div>
-    <div class="mt-4 mb-6 text-center text-md text-blue-700 font-semibold" id="displayQuestNum">
-    </div>
     <div class="px-16 text-gray-600 font-serif italic"> It is a time for great decisions and strong leaders. 
     Not all knights and ladies of Avalon are loyal ot Arthur, and yet you
     must choose only those that are Good to represent Arthur in his quests. If an open ear and eye is kept, Merlin's sage
     advice can be discerned as whispers of truth.
-    </div>
-
-    <div class="mt-8 px-16 text-md text-gray-700 font-bold"> 
-    Team Assignment: After appropriate discussion, the Leader takes the required number of Team Tokens (using the folowing
-    chart, or numbers on the tableau) and assigns each Team Token to any player.
-    </div>
-    <div class="flex justify-center mt-4">
-        <img src="images/TeamBuildingTableau.png" class="h-44 object-contain rounded-lg shadow-lg">
     </div>
 
 
@@ -59,31 +49,45 @@
     </div>
 
     <div class="m-8">
-        <h3 class="text-base font-semibold leading-6 text-gray-900 text-center">Vote tracker: 
-            Evil wins the game if there are <span class="text-red-500">5</span> consecutive failed votes! 
-        </h3>
+
         <dl class="flex gap-8 justify-center mt-8">
         <!-- Square Button -->
-        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)" >
-            Track Failure
+        <button class="h-16 w-32 bg-yellow-500  font-bold rounded-lg" onclick="makeRed(this)" >
+            Vote Fail
         </button>
-        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
-            Track Failure
+        <button class="h-16 w-32 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
+            Vote Fail
         </button>
-        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
-            Track Failure
+        <button class="h-16 w-32 bg-yellow-500  font-bold rounded-lg" onclick="makeRed(this)">
+            Vote Fail
         </button>
-        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
-            Track Failure
+        <button class="h-16 w-32 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
+            Vote Fail
         </button>
-        <button class="h-16 w-32 bg-blue-500  text-white font-bold rounded-lg" onclick="makeRed(this)">
-            Track Failure
+        <button class="h-16 w-32 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
+            Vote Fail
         </button>
         </dl>
     </div>
 
     <div class="flex justify-center">
-        <button onclick="progress()" class="h-16 w-32 bg-green-700 text-white font-bold rounded-lg">Move On To Quest</button>
+        <button onclick="progress()" class="h-16 w-32 bg-indigo-300 font-bold rounded-lg">Move On To Quest</button>
+    </div>
+
+    <div class="mt-8 px-16 text-md text-gray-700">
+        Team Assignment: After appropriate discussion, the Leader takes the required number of Team Tokens (using the
+        folowing chart, or numbers on the tableau) and assigns each Team Token to any player.<br>
+        Each player, including the Leader, secretly selects one Vote. When all players have their selected vote card,
+        the Leader asks for the Votes to be revealed. Everyone can se how you voted. <span class="font-semibold">The Team
+        is approved if the majority accepts.</span>
+    </div>
+    <div class="mt-8 px-16 text-md text-gray-700 font-boldr">Vote tracker:
+        Evil wins the game if there are <span class="text-red-500">5</span> consecutive failed votes!
+    </div>
+    <div class="mt-4 mb-6 text-center text-md text-gray-700" id="displayQuestNum">
+    </div>
+    <div class="flex justify-center mt-4">
+        <img src="images/TeamBuildingTableau.png" class="h-44 object-contain rounded-lg shadow-lg">
     </div>
 
     <!-- Actual Content Ends -->

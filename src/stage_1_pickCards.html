@@ -43,15 +43,14 @@
     each other and remain hidden from all but one of Arthur's servants. Merlin alone knows the agents of Evil, but he must
     speak of this only in riddles. If his true identity is discovered all will be lost.</div>
     <div class="mt-8 text-center text-md text-gray-700 font-bold"> Tap your card to view your identity.<br>
-    Tap again to hide it.
+    Make sure to tap again to hide it.
     </div>
-
-    <!-- <div id="player-count" class="text-center text-gray-700"></div> -->
-    <div id="role-call" class="text-center text-gray-700"></div>
 
 
     <ul id="array-list" class="m-4 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></ul>
 
+    <!-- <div id="player-count" class="text-center text-gray-700"></div> -->
+    <div id="role-call" class="text-center text-gray-700"></div>
 
     <!-- Narration -->
     <div class="mt-32 mb-4 text-center text-xl text-gray-700 font-bold"> Narration Script</div>
@@ -78,7 +77,10 @@
 
     </div>
 
-
+    <div class="flex justify-center my-8">
+        <button onclick="progress()" class="h-16 w-32 bg-indigo-300  font-bold rounded-lg">Move On To
+            Team Building</button>
+    </div>
 
 
     <!-- Actual Content Ends -->
@@ -129,15 +131,15 @@
             
             storedArray.forEach((item, index) => {
                 const li = document.createElement('li');  // Create a new <li> element
-                li.className = "relative h-96 flex flex-col rounded-lg bg-blue-100 items-center justify-center shadow";
+                li.className = "relative h-96 flex flex-col rounded-lg bg-blue-100 items-center shadow my-2";
 
                 const playerDiv = document.createElement('div');
-                playerDiv.textContent = `Player ${index + 1}`;
-                playerDiv.className = "absolute top-4 text-center text-gray-800 font-semibold";
+                playerDiv.textContent = `Player ${index + 1}: Click to Flip`;
+                playerDiv.className = "mt-3 hover:cursor-pointer bg-indigo-300 px-2 py-1 rounded-lg top-4 text-center text-gray-800 font-semibold ";
 
                 const charRole = document.createElement('div');
                 charRole.textContent = `${item}`;
-                charRole.className = "visible hidden";
+                charRole.className = " visible hidden text-center font-serif italic text-gray-700";
 
 
                 // Create the image element
@@ -148,14 +150,14 @@
 
 
                 // Add the onclick event listener for each <li> element
-                li.onclick = function () {
+                playerDiv.onclick = function () {
                     // Toggle the 'hidden' class to show/hide the element
                     charRole.classList.toggle('hidden')
                     charImage.classList.toggle('hidden')
-
                 };
-                playerDiv.append(charRole)
-                li.append(playerDiv, charImage);
+
+            
+                li.append(playerDiv, charImage, charRole);
                 
                 
                 listContainer.appendChild(li);  // Append the <li> to the list container
@@ -163,6 +165,10 @@
         } else {
             // Handle case if 'players' is not set (e.g., if user navigated directly)
             alert.log('No player number found.');
+        }
+
+        function progress() {
+            window.location.href = "stage_2_teamBuilding.html";
         }
     </script>
 </body>
