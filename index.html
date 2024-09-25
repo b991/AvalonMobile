@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avalon Mobile</title>
     <link href="./src/output.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
 
 //Stage 1:  Character Selection
@@ -50,7 +50,7 @@
             let parsedNumber = parseInt(numInput);
 
 //Stage 1.5: Create characters based on num of player
-            // Game has common good (0), common evil(1), Merlin (2), Percival(3) and Morgana(4) built in. 
+            // Game has common good (0), assasin, Merlin (2), Percival(3) and Morgana(4) built in. 
             if(parsedNumber==5){
                 // 3 good, 2 evil
                 const chooseGood = Math.floor(Math.random() * 5);
@@ -62,7 +62,104 @@
                 sessionStorage.setItem('evilPeopleCount', 2)
 
             }
+            if(parsedNumber == 6){
+                // 4 good, 2 evil
+                // has  Merlin, Percival, Loyal-knight * 2, Assassin, Morgana
+                const chooseGood1 = Math.floor(Math.random() * 5);
+                let sc1 = goodCharacters[chooseGood1]; // Access good1, good2, etc.
 
+                const chooseGood2 = Math.floor(Math.random() * 5);
+                let sc2 = goodCharacters[chooseGood2]; // Access good1, good2, etc.
+
+                let array = [merlin, perc, sc1, sc2, assassin, morgana]
+                shuffled = shuffleArray(array)
+                sessionStorage.setItem('characterArray', JSON.stringify(shuffled))
+                sessionStorage.setItem('goodPeopleCount', 4)
+                sessionStorage.setItem('evilPeopleCount', 2)
+            }
+            if (parsedNumber == 7) {
+                // 4 good, 3 evil
+                // has  Merlin, Percival, Loyal-knight * 2, Mordred, Morgana, Assassin
+                const chooseGood1 = Math.floor(Math.random() * 5);
+                let sc1 = goodCharacters[chooseGood1]; // Access good1, good2, etc.
+
+                const chooseGood2 = Math.floor(Math.random() * 5);
+                let sc2 = goodCharacters[chooseGood2]; // Access good1, good2, etc.
+
+                let array = [merlin, perc, sc1, sc2, mordred, morgana, assassin]
+                shuffled = shuffleArray(array)
+                sessionStorage.setItem('characterArray', JSON.stringify(shuffled))
+                sessionStorage.setItem('goodPeopleCount', 4)
+                sessionStorage.setItem('evilPeopleCount', 3)
+            }
+            if (parsedNumber == 8) {
+                // 5 good, 3 evil
+                // has  Merlin, Percival, Loyal-knight * 3, Mordred, Morgana, Assassin
+                const chooseGood1 = Math.floor(Math.random() * 5);
+                let sc1 = goodCharacters[chooseGood1]; // Access good1, good2, etc.
+
+                const chooseGood2 = Math.floor(Math.random() * 5);
+                let sc2 = goodCharacters[chooseGood2]; // Access good1, good2, etc.
+
+
+                const chooseGood3 = Math.floor(Math.random() * 5);
+                let sc3 = goodCharacters[chooseGood3]; // Access good1, good2, etc.
+
+
+                let array = [merlin, perc, sc1, sc2, sc3, mordred, morgana, assassin]
+                shuffled = shuffleArray(array)
+                sessionStorage.setItem('characterArray', JSON.stringify(shuffled))
+                sessionStorage.setItem('goodPeopleCount', 5)
+                sessionStorage.setItem('evilPeopleCount', 3)
+            }
+            if (parsedNumber == 9) {
+                // 6 good, 3 evil
+                // has  Merlin, Percival, Loyal-knight * 4, Mordred, Morgana, Assassin
+                const chooseGood1 = Math.floor(Math.random() * 5);
+                let sc1 = goodCharacters[chooseGood1]; // Access good1, good2, etc.
+
+                const chooseGood2 = Math.floor(Math.random() * 5);
+                let sc2 = goodCharacters[chooseGood2]; // Access good1, good2, etc.
+
+
+                const chooseGood3 = Math.floor(Math.random() * 5);
+                let sc3 = goodCharacters[chooseGood3]; // Access good1, good2, etc.
+
+                const chooseGood4 = Math.floor(Math.random() * 5);
+                let sc4 = goodCharacters[chooseGood4]; // Access good1, good2, etc.
+
+
+                let array = [merlin, perc, sc1, sc2, sc3, sc4, mordred, morgana, assassin]
+                shuffled = shuffleArray(array)
+                sessionStorage.setItem('characterArray', JSON.stringify(shuffled))
+                sessionStorage.setItem('goodPeopleCount', 6)
+                sessionStorage.setItem('evilPeopleCount', 3)
+            }
+            if (parsedNumber == 10) {
+                // 6 good, 4 evil
+                // has  Merlin, Percival, Loyal-knight * 4, Mordred, Morgana, Assassin, morderd-m
+                const chooseGood1 = Math.floor(Math.random() * 5);
+                let sc1 = goodCharacters[chooseGood1]; // Access good1, good2, etc.
+
+                const chooseGood2 = Math.floor(Math.random() * 5);
+                let sc2 = goodCharacters[chooseGood2]; // Access good1, good2, etc.
+
+
+                const chooseGood3 = Math.floor(Math.random() * 5);
+                let sc3 = goodCharacters[chooseGood3]; // Access good1, good2, etc.
+
+                const chooseGood4 = Math.floor(Math.random() * 5);
+                let sc4 = goodCharacters[chooseGood4]; // Access good1, good2, etc.
+
+                const e1 = Math.floor(Math.random() * 3);
+                let ec1 = evilCharacters[e1]; // Access good1, good2, etc.
+                evilCharacters
+                let array = [merlin, perc, sc1, sc2, sc3, sc4, mordred, morgana, assassin,ec1]
+                shuffled = shuffleArray(array)
+                sessionStorage.setItem('characterArray', JSON.stringify(shuffled))
+                sessionStorage.setItem('goodPeopleCount', 6)
+                sessionStorage.setItem('evilPeopleCount', 4)
+            }
             // Store info 
             sessionStorage.setItem('playersNum', parsedNumber);
 
@@ -106,9 +203,11 @@
             <div class="flex justify-between items-center h-16">
                 <div class="md:flex space-x-4">
                     <a href="index.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Home</a>
-                    <a href="./src/stage_1_pickCards.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select Characters</a>
-                    <a href="./src/stage_2_teamBuilding.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team Building</a>
+                    <a href="./src/stage_1_pickCards.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Select-Characters</a>
+                    <a href="./src/stage_2_teamBuilding.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Team-Building</a>
                     <a href="./src/stage_3_quest.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Quest</a>
+                    <a href="./src/info.html" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500">Info</a>
+
                 </div>
 
             </div>
@@ -116,7 +215,7 @@
 
     </nav>
     <!-- Main Section -->
-    <div class="flex items-center justify-center h-screen ">
+    <div class="flex flex-col items-center justify-center h-screen">
         <div class="p-4">
             <div class="text-center rounded-md bg-indigo-50 px-2.5 py-2.5 text-xl font-bold text-indigo-600 shadow-sm hover:bg-indigo-100">Welcome to Avalon Mobile</div>
             <label for="num" class="pt-4 block text-sm font-medium leading-6 text-gray-900">Enter how many people are playing the game:</label>
@@ -131,8 +230,23 @@
                 onclick="recordNumber()">Enter</button>
             <div id="warning_message" class="mt-2 text-sm text-rose-600"></div>
         </div>    
+    <div class="px-16 text-xl text-gray-700 text-center font-bold">Good vs Evil Count</div>
+    <div class="flex justify-center mt-4">
+        <img src="./src/images/GoodEvilCount.png" class="h-24 object-contain rounded-lg shadow-lg">
     </div>
+    <div class="m-16 text-md text-gray-700 space-y-4">
+        5 player set-up: <span class="text-green-600">Merlin, Percival, Loyal-knight,</span> <span class="text-red-600">Assassin, Morgana</span><br>
+        6 player* set-up: <span class="text-green-600">Merlin, Percival, Loyal-knight * 2,</span> <span class="text-red-600">Assassin, Morgana</span><br>
+        7 player* set-up: <span class="text-green-600">Merlin, Percival, Loyal-knight * 2,</span> <span class="text-red-600">Mordred, Morgana, Assassin</span><br>
+        8 player* set-up: <span class="text-green-600">Merlin, Percival, Loyal-knight * 3,</span> <span class="text-red-600">Mordred, Morgana, Assassin</span><br>
+        9 player* set-up: <span class="text-green-600">Merlin, Percival, Loyal-knight * 4,</span> <span class="text-red-600">Mordred, Morgana, Assassin</span><br>
+        10 player* set-up: <span class="text-green-600">Merlin, Percival, Loyal-knight * 4,</span> <span class="text-red-600">Mordred, Morgana, Assassin, Mordred-minion</span><br>
 
+    </div>
+    </div>
+    <div class="text-sm font-bold py-4  text-center text-indigo-600 bg-indigo-50 ">
+        &copy b991, 2024
+    </div>
     <!-- Acutal Content Ends -->
 
 </body>
