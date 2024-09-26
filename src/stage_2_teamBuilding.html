@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="output.css" rel="stylesheet">
-    
+<!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 <body>
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -50,24 +50,24 @@
 
     <div class="m-8">
 
-        <dl class="flex gap-8 justify-center mt-8">
+        <div class="flex gap-8 justify-center mt-8">
         <!-- Square Button -->
-        <button class="h-16 w-32 bg-yellow-500  font-bold rounded-lg" onclick="makeRed(this)" >
+        <button class="px-4 py-4 bg-yellow-500 font-bold rounded-lg" onclick="makeRed(this)" >
             Vote Fail
         </button>
-        <button class="h-16 w-32 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
+        <button class="px-4 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
             Vote Fail
         </button>
-        <button class="h-16 w-32 bg-yellow-500  font-bold rounded-lg" onclick="makeRed(this)">
+        <button class="px-4 bg-yellow-500  font-bold rounded-lg" onclick="makeRed(this)">
             Vote Fail
         </button>
-        <button class="h-16 w-32 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
+        <button class="px-4 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
             Vote Fail
         </button>
-        <button class="h-16 w-32 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
+        <button class="px-4 bg-yellow-500   font-bold rounded-lg" onclick="makeRed(this)">
             Vote Fail
         </button>
-        </dl>
+        </div>
     </div>
 
     <div class="flex justify-center">
@@ -109,14 +109,13 @@
     displayToken.innerText = `${teamtoken}`;
 
     function makeRed(button) {
-        button.classList.toggle('bg-red-500');
+        button.classList.toggle('bg-red-400');
+        button.classList.toggle('bg-yellow-500')
     }
 
     function progress() {
         window.location.href = "stage_3_quest.html";
     }
-
-
 </script>
 
 

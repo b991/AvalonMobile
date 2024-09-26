@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="output.css" rel="stylesheet">
-    
 </head>
 
 <body>
@@ -162,7 +161,6 @@
                 } else if (result == 1) {
                     button.classList.add('bg-red-300');
                     button.classList.remove('bg-green-300');
-
                 }
             });
 
@@ -238,6 +236,8 @@
                 failQ.addEventListener('click', () => { 
                     selectedChoice = 1;  // Mark this choice as selected
                     failQ.classList.toggle('bg-red-400')
+                    failQ.classList.toggle('bg-indigo-200')
+
                     completeQ.classList.remove('bg-green-400')
                     confirm.textContent = `You choose to fail the Quest. Click card title to hide your selection.`
                     recordSelection(i,selectedChoice);
@@ -247,7 +247,10 @@
                 completeQ.addEventListener('click', () => {
                     selectedChoice = 0;  // Mark this choice as selected
                     completeQ.classList.toggle('bg-green-400')
+                    completeQ.classList.toggle('bg-indigo-200')
+
                     failQ.classList.remove('bg-red-400')
+
                     confirm.textContent = `You choose to success the Quest. Click card title to hide your selection.`
                     recordSelection(i,selectedChoice);
                 });
