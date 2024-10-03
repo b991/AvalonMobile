@@ -1,4 +1,7 @@
 # AvalonMobile
-Social deduction game Avalon digital version (can only be played in person). Visit: https://b991.github.io/AvalonMobile/
+Social deduction game Avalon becoming portable with your phone. 
 
-Still need to see if I need to fix it on mobile
+Play in group of 5-10 in person. No need to bring the physical boardgame anymore. 
+
+This website serves as a replacement for Avalon boardgame to deal **random character cards**, **make anonymous votes**, and **track game progress**. Visit this website to play instantly: https://b991.github.io/AvalonMobile/
+
