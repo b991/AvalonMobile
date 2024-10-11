@@ -45,7 +45,6 @@
     <div class="mt-8 mb-4 text-center text-xl text-gray-700 font-bold"> Stage 3: Quest
     </div>
     <div class="mt-4 mb-6 text-center text-md font-semibold" id="displayQuestNum"></div>
-    </div>
     <div class="px-16 text-gray-600 font-serif italic"> You have debated well and wisely chosen the brave knights and ladies with whom you place your trust. 
     Now it is time to measure a person's true intent and loyalty to the noble cause for which Arthur fights.<br>
     The selected knights and ladies are embarking on their quest. The whole Avalon is waiting for their success. 
@@ -62,6 +61,11 @@
     <div class="flex justify-center space-x-4">
         <button onclick="checkResult()" class="bg-indigo-300 py-3 px-2 font-bold rounded-lg">Click For Result:</button>
         <div id="questResult" class="py-2 px-2 font-bold rounded-lg"></div> <!-- Result display area -->
+    </div>
+    
+    <div class="flex justify-center mt-6">
+        <div class="bg-indigo-200 rounded-lg py-3 px-2 text-center text-md font-semibold" id="displayBadNum">Knights have not gone on quest</div>
+
     </div>
 
     <!-- Master Quest Tracker -->
@@ -266,8 +270,11 @@
             const resultDiv = document.getElementById('questResult');
             const allPositive = playerChoices.every(num => num >= 0);
 
+
+            const displayNumTrater = document.getElementById('displayBadNum')
             if (allPositive){
                 let resultMessage;
+                // Count of bad guys
                 const countOfOnes = playerChoices.filter(num => num == 1).length;
                 if (countOfOnes < 1) {
                     resultMessage = "success"; // If there are no ones, return success
@@ -280,15 +287,26 @@
                 if (resultMessage == "success"){
                     resultDiv.classList.add("bg-green-200")
                     resultDiv.classList.remove("bg-red-200")
+
+                    displayNumTrater.classList.add("bg-green-200")
+                    displayNumTrater.classList.remove("bg-red-200")
+
                 }else if(resultMessage=="fail"){
                     resultDiv.classList.add("bg-red-200")
                     resultDiv.classList.remove("bg-green-200")
+
+                    displayNumTrater.classList.add("bg-red-200")
+                    displayNumTrater.classList.remove("bg-green-200")
                 }
                 if (resultMessage == "success") {
                     questResult[intQuestNum-1] = 0
                 } else if (resultMessage == "fail") {
                     questResult[intQuestNum - 1] = 1
                 }
+
+                // Check how many bad guys
+                displayNumTrater.textContent = `There are ${countOfOnes} knight(s) choose to fail the quest`;
+
                 assignButtonColors(resultMessage)
                 sessionStorage.setItem('questResult', JSON.stringify(questResult))
             }else{
